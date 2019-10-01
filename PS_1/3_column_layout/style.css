@@ -5,7 +5,7 @@ body {
 	margin:0;
 	display : grid;
 	grid-template-rows: 1fr 5fr 1fr;
-  grid-template-columns: 1fr 5fr 1fr;
+ 	grid-template-columns: 1fr 5fr 1fr;
 	grid-gap: 1% 1%;
 }
 .box {
@@ -31,7 +31,6 @@ body {
 
 .footer { 
 	background-color:green;
-  grid-column: 1 / span 3;
-  grid-row: 3;
+  	grid-column: 1 / span 3;
 }
 

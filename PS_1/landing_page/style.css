@@ -22,12 +22,17 @@ header .container{
     height: auto;
 }
 
-.menu a {
+.menu a{
 	display: inline;
 	margin-left: 30px;
 	color: black;
-  text-decoration: none;
+  	text-decoration: none;	
 }
+
+.menu a:hover{
+	color: #1abc9c;
+}
+
 .green {
 	color: #1abc9c;
 }
@@ -46,7 +51,9 @@ header .container{
 .logo {
 	font-size: 70px;
   	font-weight: 600;
-  	margin-left: 5%;
+	margin-left: 5%;
+	text-decoration: none;
+	color: black;
 }
 
 .products{
@@ -54,10 +61,11 @@ header .container{
 }
 
 .products div {
-	width:28%;
+	width:40%;
 }
 .products p{	
 	margin: 50px 0px;
+	width: 75%;
 }
 
 .about{
@@ -109,7 +117,9 @@ header .container{
 	width: 100%;
 }
 
-
+.margin-top-10{
+	margin-top: 10px;
+}
 
 
 
