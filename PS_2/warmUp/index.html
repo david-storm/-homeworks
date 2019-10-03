@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div>
+        <form>
+            <input id="value1" type="number" name="value1">
+            <input id="value2" type="number" name="value2">
+            <input type="button" id="result" value="calculate">
+            <p>Result = <span id="result1"></span></p>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label for="timesec">Enter the time in seconds</label>
+            <br>
+            <input type="text" id="timesec" pattern="[0-9]+" placeholder="265">
+            <br>
+            <input type="button" id="formatTime" value="format time">
+            <p>Time in the format "hh:mm:ss" : <span id="formatTimeResult"></span></p>
+        </form>
+        <form>
+            <label for="timesec">Enter the time in the format "hh:mm:ss"</label>
+            <br>
+            <input type="text" id="timeformat" pattern="[0-9]{2}:[0-5][0-9]:[0-5][0-9]" placeholder="23:59:59">
+            <br>
+            <input type="button" id="resultSeconds" value="convert in seconds">    
+            <p>Time in seconds : <span id="resultSeconds1"></span></p> 
+        </form>
+    </div>
+    <div>
+        <form>
+            <input type="datetime-local" id="datetime1">
+            <input type="datetime-local" id="datetime2">
+            <input type="button" id="difference" value="difference">   
+            <p>Time has passed: <span id="resultDatatime"></span></p> 
+        </form>
+    </div>
+    <div>
+            <label>You can change this chessboard!!
+                <br>
+                <span>But it is advisable not to put a value greater than 100</span>
+            </label>
+            <input type="text" pattern="[0-9]+x[0-9]+" placeholder="8x8">
+            <input type="button"  value="draw">
+            <canvas id="tutorial" width="300" height="300"></canvas>
+    </div>
+</body>
+
+</html>
