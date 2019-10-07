@@ -1,0 +1,45 @@
+body{
+    margin: 0 auto;
+    width: 600px;
+    background-color : gold
+}
+
+.block{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+input{
+    margin: 10px 0;
+    height: 20px;
+}
+
+.text-main{
+    font-size: 24px;
+}
+.text-second{
+    font-size: 18px;
+    color: gray
+}
+.text-result{
+    font-size: 26px;
+    color: red;
+}
+.text-area-result{
+    font-size: 20px;
+    background-color: seashell;
+    padding: 10px 30px;
+}
+.button{
+    cursor: pointer;
+    height: 30px;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

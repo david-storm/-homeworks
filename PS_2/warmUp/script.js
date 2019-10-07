@@ -1,3 +1,12 @@
+const 
+MILISECONDS_IN_SECONDS = 1000,
+SECONDS_IN_MINUTE = 60,
+SECONDS_IN_HOUR = 3600,
+MINUTES_IN_HOUR = 60,
+HOURS_IN_DAY = 24,
+DAYS_IN_MONTH = 30,
+MONTHS_IN_YEAR = 12;
+
 document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("result").addEventListener('click', () => {
@@ -10,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 result += Number(value1);
             }
         }
-        console.log(result);
-        document.getElementById("result1").innerHTML = result;
+        
+        document.getElementById("result1").innerHTML = "Result = " + result;
     });
 
 
@@ -20,14 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
         let seconds = Number(document.getElementById("timesec").value);
 
         let hour = 0;
-        while (seconds >= 3600) {
-            seconds -= 3600;
+        while (seconds >= SECONDS_IN_HOUR) {
+            seconds -= SECONDS_IN_HOUR;
             hour++;
         }
 
         let minutes = 0;
-        while (seconds >= 60) {
-            seconds -= 60;
+        while (seconds >= SECONDS_IN_MINUTE) {
+            seconds -= SECONDS_IN_MINUTE;
             minutes++;
         }
 
@@ -47,15 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             timeformat += '0' + seconds;
         }
-        document.getElementById("formatTimeResult").innerHTML = timeformat;
+        document.getElementById("formatTimeResult").innerHTML = 'Time in the format "hh:mm:ss" : ' + timeformat;
     });
 
 
     document.getElementById("resultSeconds").addEventListener('click', () => {
         let time = document.getElementById("timeformat").value;
         let arr = time.split(':');
-        let seconds = Number(arr[0]) * 60 * 60 + Number(arr[1]) * 60 + Number(arr[2]);
-        document.getElementById("resultSeconds1").innerHTML = seconds + "s.";
+        let seconds = Number(arr[0]) * SECONDS_IN_MINUTE + Number(arr[1]) * SECONDS_IN_MINUTE + Number(arr[2]);
+        document.getElementById("resultSeconds1").innerHTML = 'Time in seconds : '+ seconds + "s.";
     });
 
 
@@ -80,17 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (diff == 0) {
                 const result = "ravno";
             } else {
-                diff /= 1000; // convert in second
-                const sec = diff % 60;
-                diff = (diff - sec) / 60; //convert in minutes
-                const min = diff % 60;
-                diff = (diff - min) / 60; // convert in hour
-                const hour = diff % 24;
-                diff = (diff - hour) / 24; //convert in day
-                const day = diff % 30;
-                diff = (diff - day) / 30; //convert in month
-                const month = diff % 12;
-                const year = (diff - month) / 12; // convert in year
+                diff /= MILISECONDS_IN_SECONDS; // convert in second
+                const sec = diff % SECONDS_IN_MINUTE;
+                diff = (diff - sec) / SECONDS_IN_MINUTE; //convert in minutes
+                const min = diff % MINUTES_IN_HOUR;
+                diff = (diff - min) / MINUTES_IN_HOUR; // convert in hour
+                const hour = diff % HOURS_IN_DAY;
+                diff = (diff - hour) / HOURS_IN_DAY; //convert in day
+                const day = diff % DAYS_IN_MONTH;
+                diff = (diff - day) / DAYS_IN_MONTH; //convert in month
+                const month = diff % MONTHS_IN_YEAR;
+                const year = (diff - month) / MONTHS_IN_YEAR; // convert in year
 
                 const result = (year ? year + " year(s), " : '') +
                     (month ? month + " month(s), " : '') +
@@ -99,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 document.getElementById("datetime1").style.border = "";
                 document.getElementById("datetime2").style.border = "";
-                document.getElementById("resultDatatime").innerHTML = result;
+                document.getElementById("resultDatatime").innerHTML = 'Time has passed: '+result;
 
             }
 
