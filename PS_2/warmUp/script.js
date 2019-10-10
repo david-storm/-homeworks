@@ -9,9 +9,18 @@ MONTHS_IN_YEAR = 12;
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    function validField(field, valid){
+        if(valid){
+            field.style.border = "";
+        } else{
+            alert(`The field is not filled according to the template`);
+            field.style.border = "solid 2px red";
+        }
+    };
+
     document.getElementById("result").addEventListener('click', () => {
         let value1 = Number(document.getElementById("value1").value);
-        let value2 = Number(document.getElementById("value2").value);
+        const value2 = Number(document.getElementById("value2").value);
         let result = 0;
         for (value1; value1 <= value2; value1++) {
             let lastDigit = String(value1)[String(value1).length - 1];
@@ -61,27 +70,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     document.getElementById("resultSeconds").addEventListener('click', () => {
-        let time = document.getElementById("timeformat").value;
-        let arr = time.split(':');
-        let seconds = Number(arr[0]) * SECONDS_IN_MINUTE + Number(arr[1]) * SECONDS_IN_MINUTE + Number(arr[2]);
-        document.getElementById("resultSeconds1").innerHTML = 'Time in seconds : '+ seconds + "s.";
+        const timeInput = document.getElementById("timeformat");
+        const time = timeInput.value;
+        const regexp = /[0-9]{2}:[0-5][0-9]:[0-5][0-9]/;
+        if(!regexp.test(time)){
+           validField(timeInput,false);
+        } else{
+            validField(timeInput,true);
+            const arr = time.split(':');
+            const seconds = Number(arr[0]) * SECONDS_IN_MINUTE + Number(arr[1]) * SECONDS_IN_MINUTE + Number(arr[2]);
+            document.getElementById("resultSeconds1").innerHTML = 'Time in seconds : '+ seconds + "s.";
+        }        
     });
 
 
 
     document.getElementById("difference").addEventListener('click', () => {
-        const date1 = document.getElementById("datetime1").value;
-        const date2 = document.getElementById("datetime2").value;
-
-        if (date1 == '' || date2 == '') {
-            if (date1 == '') {
-                document.getElementById("datetime1").style.border = "solid 2px red";
-            }
-            if (date2 == '') {
-                document.getElementById("datetime2").style.border = "solid 2px red";
-            }
-            alert("field 'datatime' is empty");
-
+        const date1Input = document.getElementById("datetime1");
+        const date2Input = document.getElementById("datetime2");
+        const date1 = date1Input.value;
+        const date2 = date2Input.value;
+        
+        if (date1 == '') {
+            validField(date1Input, false);
+        }
+        else if (date2 == '') {
+            validField(date2Input, false);
         } else {
             let seconds1 = Date.parse(date1);
             let seconds2 = Date.parse(date2);
@@ -106,8 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     (day ? day + " day(s), " : '') + (hour ? hour + " hour(s), " : '') +
                     (min ? min + " minute(s), " : '') + (sec ? sec + " second(s), " : '');
 
-                document.getElementById("datetime1").style.border = "";
-                document.getElementById("datetime2").style.border = "";
+                validField(date1Input, true);
+                validField(date2Input, true);
                 document.getElementById("resultDatatime").innerHTML = 'Time has passed: '+result;
 
             }
@@ -147,10 +161,17 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     document.getElementById("drawCheckerboard").addEventListener('click', () => {
-        const sizeCheckerboard = document.getElementById("sizeCheckerboard").value;
-        const width = sizeCheckerboard.split("x")[1];
-        const height = sizeCheckerboard.split("x")[0];
-        draw(width, height);
+        const sizeCheckerboardInput = document.getElementById("sizeCheckerboard");
+        const sizeCheckerboard = sizeCheckerboardInput.value;
+        const regexp = /\d+[xX]\d+/;
+        if(!regexp.test(sizeCheckerboard)){
+            validField(sizeCheckerboardInput, false);
+        } else {
+            validField(sizeCheckerboardInput, true);
+            const width = sizeCheckerboard.split("x")[1];
+            const height = sizeCheckerboard.split("x")[0];
+            draw(width, height);
+        }
     });
 
 
