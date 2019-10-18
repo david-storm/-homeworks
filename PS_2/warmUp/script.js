@@ -202,7 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = document.getElementById("ipAndUrl").value;
         let arr = text.split(',');
         const regexpUrl = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/;
-        const regexpIP = /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/g;
+        const regexpIP4 = /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/g;
+        const regexpIP6 = /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[\.:](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/g;
 
         let ipValidation = [];
         let urlValidation = [];
@@ -210,10 +211,13 @@ document.addEventListener("DOMContentLoaded", () => {
         arr.forEach(link => {
             link = link.trim();
 
-            let trueLink = link.match(regexpIP);
+            let trueLink = link.match(regexpIP4);
             if (trueLink) {
                 ipValidation.push(trueLink);
-
+            }
+            trueLink = link.match(regexpIP6);
+            if (trueLink) {
+                ipValidation.push(trueLink);
             }
 
             trueLink = link.match(regexpUrl);
