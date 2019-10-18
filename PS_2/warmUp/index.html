@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="script.js"></script>
-    <link  href = "./style.css"  type = "text/css"  rel = "stylesheet" >
+    <link href="./style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -15,68 +15,60 @@
         <form>
             <p class="text-main">Enter any two numbers</p>
             <div>
-                <input id="value1" type="number">
-                <input id="value2" type="number">
-                <input class="button" type="button" id="result" value="calculate">
+                <input id="firstNumber" type="number">
+                <input id="secondNumber" type="number">
+                <input class="button" type="button" id="calcResult" value="calculate">
             </div>
-            <p class="text-result" id="result1"></p>
+            <p class="text-result" id="result"></p>
         </form>
     </div>
     <hr>
     <div class="block">
         <form>
-            <label class="text-main" for="timesec">Enter the time in seconds</label>
-            <br>
-            <input type="number" id="timesec" placeholder="265">
-            <br>
+            <label class="text-main" for="timeSeconds">Enter the time in seconds</label>
+            <input type="number" id="timeSeconds" placeholder="265">
             <input class="button" type="button" id="formatTime" value="format time">
-            <p class="text-result" id="formatTimeResult"></p>
+            <p class="text-result" id="timeResultFormat"></p>
         </form>
         <form>
-            <label class="text-main" for="timesec">Enter the time in the format "hh:mm:ss"</label>
-            <br>
-            <input type="text" id="timeformat" placeholder="23:59:59">
-            <br>
-            <input class="button" type="button" id="resultSeconds" value="convert in seconds">
-            <p class="text-result" id="resultSeconds1"></p>
+            <label class="text-main" for="timeFormat">Enter the time in the format "hh:mm:ss"</label>
+            <input type="text" id="timeFormat" placeholder="23:59:59">
+            <input class="button" type="button" id="formatTimeSeconds" value="convert in seconds">
+            <p class="text-result" id="resultTimeSeconds"></p>
         </form>
     </div>
     <hr>
     <div class="block">
         <p class="text-main">Enter two dates between which you need to calculate the time.</p>
         <form>
-            <input type="datetime-local" id="datetime1">
-            <input type="datetime-local" id="datetime2">
+            <input type="datetime-local" id="datetimeStart">
+            <input type="datetime-local" id="datetimeFinish">
             <input class="button" type="button" id="difference" value="difference">
             <p class="text-result" id="resultDatatime"></p>
         </form>
     </div>
     <hr>
     <div class="block">
-        <label class="text-main">You can change this chessboard!!
-            <br>
+        <label class="text-main">You can change this chessboard!!<br>
             <span class="text-second">But it is advisable not to put a value greater than 100</span>
         </label>
-        <br>
         <input type="text" id="sizeCheckerboard" placeholder="8x8">
-
         <input class="button" type="button" id="drawCheckerboard" value="draw">
-        <br>
         <canvas id="tutorial" width="300" height="300"></canvas>
     </div>
     <hr>
     <div class="block">
-        <p class="text-main">Field for cleaning urls and ip</p>
+        <label class="text-main" for="ipAndUrl">Field for cleaning urls and ip</label>
         <textarea id="ipAndUrl" cols="70" rows="15"></textarea>
-        <p class="text-second">Formatted links will be below</p> 
+        <p class="text-second">Formatted links will be below</p>
         <p class="text-area-result" id="ipAndUrlRes">The results will be here</p>
     </div>
     <hr>
     <div class="block">
-        <p class="text-main" >Regular Expressions Online</p>
+        <p class="text-main">Regular Expressions Online</p>
         <form>
             <div class="row">
-                <div class="block"> 
+                <div class="block">
                     <label class="text-second" for="regexp">Regular expressions</label>
                     <input type="text" id="regexp">
                 </div>
@@ -87,7 +79,7 @@
                 <input class="button" type="button" id="resultregexp" value="regexp">
             </div>
             <textarea id="regexpText" cols="70" rows="15"></textarea>
-        </form> 
+        </form>
         <p class="text-area-result" id="resultregexpText">The results will be here</p>
     </div>
 </body>

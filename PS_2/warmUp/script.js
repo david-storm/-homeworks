@@ -18,9 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    document.getElementById("result").addEventListener('click', () => {
-        let value1 = Number(document.getElementById("value1").value);
-        const value2 = Number(document.getElementById("value2").value);
+    document.getElementById("calcResult").addEventListener('click', () => {
+        let value1 = Number(document.getElementById("firstNumber").value);
+        let value2 = Number(document.getElementById("secondNumber").value);
+        if (value1 > value2) {
+            [value1, value2] = [value2, value1];
+        }
         let result = 0;
         for (value1; value1 <= value2; value1++) {
             let lastDigit = String(value1)[String(value1).length - 1];
@@ -29,13 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        document.getElementById("result1").innerHTML = "Result = " + result;
+        document.getElementById("result").innerHTML = "Result = " + result;
     });
 
 
 
     document.getElementById("formatTime").addEventListener('click', () => {
-        let seconds = Number(document.getElementById("timesec").value);
+        let seconds = Math.abs(Number(document.getElementById("timeSeconds").value));
 
         let hour = 0;
         while (seconds >= SECONDS_IN_HOUR) {
@@ -65,12 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             timeformat += '0' + seconds;
         }
-        document.getElementById("formatTimeResult").innerHTML = 'Time in the format "hh:mm:ss" : ' + timeformat;
+        document.getElementById("timeResultFormat").innerHTML = 'Time in the format "hh:mm:ss" : ' + timeformat;
     });
 
 
-    document.getElementById("resultSeconds").addEventListener('click', () => {
-        const timeInput = document.getElementById("timeformat");
+    document.getElementById("formatTimeSeconds").addEventListener('click', () => {
+        const timeInput = document.getElementById("timeFormat");
         const time = timeInput.value;
         const regexp = /[0-9]{2}:[0-5][0-9]:[0-5][0-9]/;
         if (!regexp.test(time)) {
@@ -79,54 +82,75 @@ document.addEventListener("DOMContentLoaded", () => {
             validField(timeInput, true);
             const arr = time.split(':');
             const seconds = Number(arr[0]) * SECONDS_IN_HOUR + Number(arr[1]) * SECONDS_IN_MINUTE + Number(arr[2]);
-            document.getElementById("resultSeconds1").innerHTML = 'Time in seconds : ' + seconds + "s.";
+            document.getElementById("resultTimeSeconds").innerHTML = 'Time in seconds : ' + seconds + "s.";
         }
     });
 
 
 
     document.getElementById("difference").addEventListener('click', () => {
-        const date1Input = document.getElementById("datetime1");
-        const date2Input = document.getElementById("datetime2");
-        const date1 = date1Input.value;
-        const date2 = date2Input.value;
+        const date1Input = document.getElementById("datetimeStart");
+        const date2Input = document.getElementById("datetimeFinish");
+        let date1 = date1Input.value;
+        let date2 = date2Input.value;
 
         if (date1 == '') {
             validField(date1Input, false);
         } else if (date2 == '') {
             validField(date2Input, false);
         } else {
-            let seconds1 = Date.parse(date1);
-            let seconds2 = Date.parse(date2);
-            let diff = Math.abs(seconds1 - seconds2);
-            if (diff == 0) {
-                const result = "ravno";
-            } else {
-                diff /= MILISECONDS_IN_SECONDS; // convert in second
-                const sec = diff % SECONDS_IN_MINUTE;
-                diff = (diff - sec) / SECONDS_IN_MINUTE; //convert in minutes
-                const min = diff % MINUTES_IN_HOUR;
-                diff = (diff - min) / MINUTES_IN_HOUR; // convert in hour
-                const hour = diff % HOURS_IN_DAY;
-                diff = (diff - hour) / HOURS_IN_DAY; //convert in day
-                const day = diff % DAYS_IN_MONTH;
-                diff = (diff - day) / DAYS_IN_MONTH; //convert in month
-                const month = diff % MONTHS_IN_YEAR;
-                const year = (diff - month) / MONTHS_IN_YEAR; // convert in year
 
-                const result = (year ? year + " year(s), " : '') +
+            date1 = new Date(date1);
+            date2 = new Date(date2);
+
+            if (date1 > date2) {
+                [date1, date2] = [date2, date1];
+            }
+
+            if (date1 - date2 == 0) {
+                document.getElementById("resultDatatime").innerHTML = 'Same time.';
+            } else {
+
+                let second = date2.getSeconds() - date1.getSeconds();
+                let minute = date2.getMinutes() - date1.getMinutes();
+                let hour = date2.getHours() - date1.getHours();
+                let day = date2.getDate() - date1.getDate();
+                let month = date2.getMonth() - date1.getMonth();
+                let year = date2.getFullYear() - date1.getFullYear();
+
+                if (second < 0) {
+                    second = SECONDS_IN_MINUTE + second;
+                    minute--;
+                }
+                if (minute < 0) {
+                    minute = MINUTES_IN_HOUR + minute;
+                    hour--;
+                }
+                if (hour < 0) {
+                    hour = HOURS_IN_DAY + hour;
+                    day--;
+                }
+                if (day < 0) {
+                    day = DAYS_IN_MONTH + day;
+                    month--;
+                }
+                if (month < 0) {
+                    month = MONTHS_IN_YEAR + month;
+                    year--;
+                }
+
+                let result = (year ? year + " year(s), " : '') +
                     (month ? month + " month(s), " : '') +
                     (day ? day + " day(s), " : '') + (hour ? hour + " hour(s), " : '') +
-                    (min ? min + " minute(s), " : '') + (sec ? sec + " second(s), " : '');
+                    (minute ? minute + " minute(s), " : '') + (second ? second + " second(s)," : '');
+
+                result = result.substring(0, result.length - 2) + '.';
 
                 validField(date1Input, true);
                 validField(date2Input, true);
                 document.getElementById("resultDatatime").innerHTML = 'Time has passed: ' + result;
-
             }
-
         }
-
     });
 
 

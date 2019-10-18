@@ -40,6 +40,7 @@ const CURRENCY = '$';
 const filter = document.getElementById("filter");
 const searchByName = document.getElementById("search");
 
+let GoogsSort = GOODS;
 let GoogsFilter;
 let GoogsFilterAll;
 
@@ -50,9 +51,9 @@ const drawFilterTable = () => {
 }
 const filterCategory = () => {
   if (filter.value) {
-    GoogsFilter = GOODS.filter(obj => obj.category == filter.value);
+    GoogsFilter = GoogsSort.filter(obj => obj.category == filter.value);
   } else {
-    GoogsFilter = GOODS;
+    GoogsFilter = GoogsSort;
   }
 };
 
@@ -80,7 +81,7 @@ let sortName = false;
 const sort = (id, prop, sorting) => {
   let headSort = document.getElementById(id);
   headSort.addEventListener("click", () => {
-    GoogsFilterAll = GoogsFilterAll.sort(function (a, b) {
+    GoogsSort = GOODS.sort(function (a, b) {
       let categoryA = a[prop].toLowerCase(),
         categoryB = b[prop].toLowerCase();
       if (categoryA < categoryB)
@@ -92,7 +93,7 @@ const sort = (id, prop, sorting) => {
     if (!sorting) {
       sorting = true;
     } else {
-      GoogsFilterAll = GoogsFilterAll.reverse();
+      GoogsSort = GoogsSort.reverse();
       sorting = false;
     }
     drawArrow(headSort, sorting);
@@ -122,7 +123,7 @@ drawFilterTable();
 function drawTable() {
   let tableBody = '';
   let totalPrice = 0;
-
+  console.log(GoogsFilterAll);
   for (let i = 0; i < GoogsFilterAll.length; i++) {
     tableBody += newRow(i);
     totalPrice += GoogsFilterAll[i].price * GoogsFilterAll[i].amount;
