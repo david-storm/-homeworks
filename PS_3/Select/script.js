@@ -20,6 +20,7 @@ $(document).ready(function () {
     $(".def").addClass("option");
 
     $(".option").click(function(){
+        $(this).toggleClass("selected");
         $(this).toggleClass("option");
         $(".option").slideToggle();
         $(this).toggleClass("option");

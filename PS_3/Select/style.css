@@ -5,16 +5,19 @@
     font-size: 40px;
     width: 500px;
 }
+
 p{
     display: inline;
     font-size: 50px;
+}
+.selected{
+    
 }
 .hover{
     background-color: gray;
     color: white;
     cursor: pointer;
 }
-
 
 .option{  
     width: 500px;
