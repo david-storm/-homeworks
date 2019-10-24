@@ -4,28 +4,55 @@
     display: inline-block;
     font-size: 40px;
     width: 500px;
+    position: relative;
 }
 
+.select-item:not(:first-child){
+    color:red;
+}
+.conteiner{
+    margin: 50px auto;
+    width: 500px;
+
+}
 p{
     display: inline;
     font-size: 50px;
 }
-.selected{
-    
+.arrow-up::after{
+content: "▴";
+position: absolute;
+left: 90%;
 }
-.hover{
+.arrow-down::after{
+content: "▾";
+position: absolute;
+left: 90%;
+}
+
+/* span:after */
+.selected{
+    /* display: block !important; */
+}
+.selected:hover{
+    background-color:gold;
+    color: white;
+    cursor: pointer;
+} 
+.option:hover{
     background-color: gray;
     color: white;
     cursor: pointer;
 }
 
-.option{  
-    width: 500px;
+.select-item{  
     height: 65px;
     text-align: start;
+    align-items: center;
+    display: flex;
 }
 .def{
-    text-align: start;
+    padding-left: 15px;
 }
 .icon{
     background-image:  url(./icon.png);

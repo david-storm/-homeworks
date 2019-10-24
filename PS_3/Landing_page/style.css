@@ -1,18 +1,36 @@
 body {
 	margin: 0 auto;
 	font-family: Helvetica, sans-serif;
+	
 }
 .container{
 	min-width:300px;
-	width:100%;
 	margin:0 auto;
 	display: flex;
-  	justify-content: center;
+	  justify-content: center;
+	  background: white;
 }
 header .container{
 	justify-content:space-between;
+	position: relative;
+	z-index: 2;
 }
-
+.fixed{
+	position: fixed;
+    right: 50px;
+    z-index: 0;
+    top: 40px;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    background: cornflowerblue;
+    text-transform: uppercase;
+}
+.fixed a{
+	text-decoration: none;	
+	color: black;
+}
 .block {
 	display:block;
 }
@@ -45,7 +63,8 @@ header .container{
 	font-size:20px;
 	text-transform: uppercase;
 	font-weight: 400;
-	
+	position: relative;
+
 }
 .logo {
 	font-size: 70px;
@@ -57,6 +76,7 @@ header .container{
 
 .products{
 	padding: 50px;
+	
 }
 
 .products div {
@@ -69,6 +89,7 @@ header .container{
 
 .about{
 	text-align: center;
+	background-color: white;
 }
 .icon{
 	border-radius: 50%;

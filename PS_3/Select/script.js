@@ -5,31 +5,39 @@ const SOCIAL_NETWORKS = [
     'class image': 'inst'},
     {'name':'YouTube',
     'class image': 'youtube'}
-    
 ];
 $(document).ready(function () {
     
-    $(".select").html("<div class='def'>Select social networks</div>");
+    //формирование дефолта
+    $(".select").html("<div class='def arrow-down select-item selected'>Select social networks</div>");
 
+    // формирование всех элементов выбора, option
     $.each(SOCIAL_NETWORKS, function(i, obj) {
-        $(".def").after(`<div class="option"><span class="icon ${obj['class image']}"></span>
+        $(".def").after(`<div class="option select-item"><span class="icon ${obj['class image']}"></span>
         <p>${obj.name}</p></div>`);
     });
     
     $(".option").hide();
-    $(".def").addClass("option");
+    
+    //функция разворачивания!  выбора и сворачивания
+    $(".select-item").on( "click", function(){
+        $(this).toggleClass("arrow-down arrow-up");
+        // $(this).toggleClass("arrow-up");
+        
+        // if($(this).hasClass('selected')){
+        //     $(".option").slideToggle();
+        //     console.log('selected');
+        // }
 
-    $(".option").click(function(){
-        $(this).toggleClass("selected");
-        $(this).toggleClass("option");
+        if($(this).hasClass('option')){
+            $(".selected").addClass("option");
+            $(".selected").removeClass("selected");
+            $(this).addClass("selected");
+            $(this).removeClass("option");
+            // console.log('option');
+            // $(".option").slideToggle();
+        }
         $(".option").slideToggle();
-        $(this).toggleClass("option");
     });
-
-    $(".option").hover(function() {
-        $( this ).addClass('hover');
-    }, function() {
-        $( this ).removeClass('hover');
-    });
-
+   
 });
