@@ -21,23 +21,18 @@ $(document).ready(function () {
     
     //функция разворачивания!  выбора и сворачивания
     $(".select-item").on( "click", function(){
-        $(this).toggleClass("arrow-down arrow-up");
-        // $(this).toggleClass("arrow-up");
-        
-        // if($(this).hasClass('selected')){
-        //     $(".option").slideToggle();
-        //     console.log('selected');
-        // }
+        if($(this).hasClass('selected')){
+              $(this).toggleClass("arrow-down arrow-up");
+        }
 
         if($(this).hasClass('option')){
             $(".selected").addClass("option");
+            $(".selected").removeClass("arrow-up");
             $(".selected").removeClass("selected");
             $(this).addClass("selected");
+            $(this).addClass("arrow-down");
             $(this).removeClass("option");
-            // console.log('option');
-            // $(".option").slideToggle();
         }
         $(".option").slideToggle();
     });
-   
 });
