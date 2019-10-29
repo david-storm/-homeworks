@@ -15,6 +15,7 @@
 p {
     font-size: 50px;
 }
+
 .arrow-up::after {
     content: "▴";
     position: absolute;

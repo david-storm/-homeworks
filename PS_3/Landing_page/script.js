@@ -15,7 +15,7 @@ $("a").click(function (event) {
     if (height > win) {
         final = top;
     } else {
-        final = top - (win - height ) / 2 ;
+        final = top - (win - height) / 2;
     }
 
     setTimeout(() => {
