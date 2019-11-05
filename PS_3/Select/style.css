@@ -1,10 +1,10 @@
 .select {
-    border: solid 2px green;
-    border-radius: 5px;
+
     display: inline-block;
     font-size: 40px;
     width: 500px;
     position: relative;
+   
 }
 
 .conteiner {
@@ -36,7 +36,18 @@ p {
     cursor: pointer;
 }
 
-.option:hover {
+.option{
+    position: absolute;
+    border: solid 2px green;
+    border-radius: 0 0 5px 5px;
+    width: inherit;
+    border-top: none;
+    box-sizing: border-box;
+    z-index: 2;
+    background-color: white;
+}
+
+.option div:hover {
     background-color: gray;
     color: white;
     cursor: pointer;
@@ -49,10 +60,22 @@ p {
     display: flex;
 }
 
-.def {
+.def{
     padding-left: 15px;
 }
+.selected {
+    border: solid 2px green;
+    border-radius: 5px 5px 0 0;
+    
+    position: relative;
+    box-sizing: border-box;
+    border-bottom: none;
+}
+.end-border{
+    border-radius: 5px;
+    border: solid 2px green;
 
+}
 .icon {
     background-image: url(./icon.png);
     width: 50px;
@@ -75,4 +98,8 @@ p {
 .youtube {
     background-position-x: 125px;
     background-position-y: -6px;
+}
+.telegram {
+    background-position-x: 58px;
+    background-position-y: 119px;
 }
