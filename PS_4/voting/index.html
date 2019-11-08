@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PHP_TASK</title>
+    </head>
+    <body>
+        <div>
+            <h1>Voting</h1>
+            <p>Please select your preferred animals</p>
+            <form action="result.php" method="POST">
+                <div>
+                    <input type="radio" id="cat" name="animal" value="cat">
+                    <label for="cat">Cat</label>
+
+                    <input type="radio" id="dog" name="animal" value="dog">
+                    <label for="dog">Dog</label>
+
+                    <input type="radio" id="fish" name="animal" value="fish">
+                    <label for="fish">Fish</label>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
