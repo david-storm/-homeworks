@@ -12,6 +12,9 @@
             <p>Please select your preferred animals</p>
             <form action="result.php" method="POST">
                 <div>
+                    <input type="radio" id="none" name="animal" value="none">
+                    <label for="none">Nothing (just see the results)</label>
+                    
                     <input type="radio" id="cat" name="animal" value="cat">
                     <label for="cat">Cat</label>
 
@@ -26,5 +29,8 @@
                 </div>
             </form>
         </div>
+        <script type="text/javascript"> 
+            document.getElementByName('animal').checked = false;
+        </script>
     </body>
 </html>

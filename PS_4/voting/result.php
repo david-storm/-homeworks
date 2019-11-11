@@ -1,44 +1,36 @@
-
 <?php
 
 if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
-$file = 'resultVoting.json';
+    $file = 'resultVoting.json';
+    $handle = fopen($file, "c+");
+    $size  = filesize($file); 
 
-$handle = fopen($file, "c+");
+    //data is not empty
+    if($size != 0){
+        $text =  fread($handle, $size);
+        $data = json_decode($text, true);
 
-$size  = filesize($file); 
+    } else {
+        $data = array(
+            'cat' => 0,
+            'dog' => 0,
+            'fish' => 0
+        );
+    }
+    fclose($handle);
+    $vot = (isset($_POST['animal']) && $_POST['animal'] != 'none') ? substr($_POST['animal'], 0, 10) : false;
 
-
-if($size != 0){
-    $text =  fread($handle, $size);
-    $data = json_decode($text, true);
-
-} else {
+    if($vot){
+        $data[$vot]++;
+    }
     
-$data = array(
-    'cat' => 0,
-    'dog' => 0,
-    'fish' => 0
-);
-
-}
-
-$vot = $_POST['animal'];
-
-$data[$vot]++;
-
-$dataJson =  json_encode($data);
-$GLOBALS["data"] =$dataJson;
-fclose($handle);
-
-
-$handle = fopen($file, 'w');
-
-fwrite($handle, $dataJson);
-
-fclose($handle);
-
+    $GLOBALS["data"] = $dataJson =  json_encode($data);
+    
+    //rename file
+    $handle = fopen($file, 'w');
+    fwrite($handle, $dataJson);
+    fclose($handle);
 }
 ?>
 
@@ -53,28 +45,20 @@ fclose($handle);
       function drawChart() {
           
         let date = JSON.parse('<?php echo $GLOBALS["data"]; ?>');
-        
-      
-       
 
-        let data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-//          ['Work',     11],
-//          ['Eat',      2],
-//          ['Commute',  2],
-//          ['Watch TV', 2],
-//          ['Sleep',    7]
-        ]);
+        let myData = [['Task', 'Hours per Day']];
         
          for(let prop in date){
              let arr = [prop, date[prop]];
              console.log(arr);
-            data.push(arr);
+            myData.push(arr);
         }
+        
+        const data = google.visualization.arrayToDataTable(myData);
 
         console.log(data);
         const options = {
-          title: 'My Daily Activities'
+          title: 'Preferred animals'
         };
 
         const chart = new google.visualization.PieChart(document.getElementById('piechart'));
