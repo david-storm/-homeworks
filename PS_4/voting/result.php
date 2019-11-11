@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
     $file = 'resultVoting.json';
@@ -37,6 +36,8 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
 <html>
   <head>
+    <link href="./style.css" type="text/css" rel="stylesheet">
+    <title>Anonim voting</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -45,29 +46,24 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
       function drawChart() {
           
         let date = JSON.parse('<?php echo $GLOBALS["data"]; ?>');
-
         let myData = [['Task', 'Hours per Day']];
-        
-         for(let prop in date){
-             let arr = [prop, date[prop]];
-             console.log(arr);
-            myData.push(arr);
+    
+        for(let prop in date){
+            myData.push([prop, date[prop]]);
         }
         
         const data = google.visualization.arrayToDataTable(myData);
-
         console.log(data);
         const options = {
           title: 'Preferred animals'
         };
 
         const chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
         chart.draw(data, options);
       }
     </script>
   </head>
   <body>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="piechart"></div>
   </body>
 </html>

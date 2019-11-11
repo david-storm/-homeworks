@@ -4,25 +4,26 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>PHP_TASK</title>
+        <link href="./style.css" type="text/css" rel="stylesheet">
+        <title>Anonim voting</title>
     </head>
     <body>
-        <div>
+        <div class="container">
             <h1>Voting</h1>
             <p>Please select your preferred animals</p>
             <form action="result.php" method="POST">
                 <div>
-                    <input type="radio" id="none" name="animal" value="none">
-                    <label for="none">Nothing (just see the results)</label>
-                    
-                    <input type="radio" id="cat" name="animal" value="cat">
+                    <input type="radio" id="cat" name="animal" value="cat" required>
                     <label for="cat">Cat</label>
 
                     <input type="radio" id="dog" name="animal" value="dog">
                     <label for="dog">Dog</label>
 
                     <input type="radio" id="fish" name="animal" value="fish">
-                    <label for="fish">Fish</label>
+                    <label for="fish">Fish</label><br>
+
+                    <input type="radio" id="none" name="animal" value="none">
+                    <label for="none">Nothing (just see the results)</label>
                 </div>
                 <div>
                     <input type="submit" name="submit" value="Submit">
@@ -30,7 +31,9 @@
             </form>
         </div>
         <script type="text/javascript"> 
-            document.getElementByName('animal').checked = false;
+           let radio = document.getElementsByName('animal');
+                for(let i=0;i<radio.length;i++)
+                    radio[i].checked = false;
         </script>
     </body>
 </html>

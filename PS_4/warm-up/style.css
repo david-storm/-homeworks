@@ -1,0 +1,39 @@
+body{
+    background: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    font-family: monospace;
+    font-size: 50px;
+    color: yellow;
+    text-shadow: 3px 6px darkslategrey;
+}
+
+.task{
+    text-align: center;
+    width: 80%;
+    box-shadow: 5px 5px 5px 5px yellow;
+    margin-bottom: 30px;
+}
+.description{
+    font-size: larger;
+    font-family: cursive;
+    color: darkblue;
+    padding: 15px;
+}
+
+form{
+
+}
+.result{
+    height: auto;
+    color: limegreen;
+    font-size: x-large;
+    font-family: cursive;
+}
+.result p {
+    margin: 0;
+}

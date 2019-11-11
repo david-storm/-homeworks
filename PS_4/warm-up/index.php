@@ -8,14 +8,15 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PHP_TASK</title>
+    <link href="./style.css" type="text/css" rel="stylesheet">
+    <title>Warm Up</title>
 </head>
 <body>
     <h1>Warm up</h1>
     <!-- TASK_1 -->
     <section class="task">
         <div class="description">
-            <p>calculate the sum of numbers from -1000 to 1000</p>
+            <p>Calculate the sum of numbers from -1000 to 1000</p>
         </div>
         <form action="1.php" method="POST">
             <input type="submit" name="task1" value="Submit">            
@@ -28,7 +29,7 @@ session_start();
     <!-- TASK_2 -->
     <section class="task">
         <div class="description">
-            <p>calculate the sum of numbers from -1000 to 1000, summing only numbers that end in 2,3, and 7</p>
+            <p>Calculate the sum of numbers from -1000 to 1000, summing only numbers that end in 2,3, and 7</p>
         </div>
         <form action="1.php" method="POST">
             <input type="submit" name="task2" value="Submit">            

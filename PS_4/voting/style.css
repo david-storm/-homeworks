@@ -1,0 +1,50 @@
+body, #piechart{
+    background: palegreen;
+}
+
+.container, #piechart{
+    margin: 50px auto;
+    width: 500px;
+    text-align: center;
+    font-family: cursive;
+}
+
+input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    cursor: crosshair;
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    outline: none;
+    margin-right: 5px;
+
+}
+  
+input:checked {
+    border: 6px solid black;
+}
+
+label {
+    cursor: crosshair;
+}
+  
+input[type="submit"]{
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    margin: 20px;
+    font-size: 20px;
+    color : white;
+    background-color: black;
+    border: solid 3px orange;
+    border-radius: 20px;
+}
+#piechart{
+border: 800px; 
+height: 500px;
+}
