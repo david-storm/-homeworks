@@ -92,7 +92,7 @@ function sumNumber() {
         foreach ($arrayNumbers as $num) {
             $res += $num;
         }
-        $_SESSION['res']['task5'] = $res;
+        $_SESSION['res']['task5'] = implode(" - ", $res);
     }
 }
 
