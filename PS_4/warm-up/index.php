@@ -22,8 +22,7 @@ require 'logic.php';
             <input type="submit" name="task1" value="Submit">            
         </form>
         <div class="result">
-            <p>Result: </p>
-            <?php result(1);?>
+            <p>Result:  <?php result(1);?> </p>
         </div>
     </section>
     <!-- TASK_2 -->
@@ -35,8 +34,7 @@ require 'logic.php';
             <input type="submit" name="task2" value="Submit">            
         </form>
         <div class="result">
-            <p>Result: </p>
-            <?php result(2);?>
+            <p>Result: <?php result(2);?> </p>
         </div>
     </section>
     <!-- TASK_3 -->
@@ -82,8 +80,8 @@ require 'logic.php';
             <input type="number" name="number" min="0" step="1">
             <input type="submit" name="task5" value="Submit">           
         </form>
-        <div class="result">
-            <?php result(5);?>
+        <div class="result">  
+            <p>Result:  <?php result(5);?> </p> 
         </div>
     </section>
     <!-- TASK_6 -->

@@ -92,7 +92,7 @@ function sumNumber() {
         foreach ($arrayNumbers as $num) {
             $res += $num;
         }
-        $_SESSION['res']['task5'] = implode(" - ", $res);
+        $_SESSION['res']['task5'] = $res;
     }
 }
 
@@ -111,7 +111,7 @@ function createArray() {
     $array = array_reverse($array);
     $res = array_map('multiplay', $array);
 
-    $_SESSION['res']['task6'] = $res;
+    $_SESSION['res']['task6'] = implode(" - ", $res);
 }
 
 function infoByText() {
@@ -147,11 +147,11 @@ function viewsFiles() {
 
         $sizeB = filesize('upload/' . $file);
         $size = readableSize($sizeB);
-        echo '<div class="item">';
+        echo '<div class="flex-container"><div class="row">';
         if (explode("/", mime_content_type('upload/' . $file))[0] == 'image') {
             echo '<img src="upload/' . $file . '" alt="' . $file . '" width="150">';
         }
-        echo "<a href=logic.php?file=$file>$file</a><span>$size</br></span></div>";
+        echo "<a href=logic.php?file=$file>$file</a><span>$size</br></span></div></div>";
     }
 }
 
@@ -183,18 +183,11 @@ function readableSize($size) {
 }
 
 if(isset($_GET) && isset($_GET['file'])){
-    
     $file = './upload/'.$_GET['file'];
     if (file_exists($file)) {
-//    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="'.basename($file).'"');
-//    header('Expires: 0');
-//    header('Cache-Control: must-revalidate');
-//    header('Pragma: public');
-//    header('Content-Length: ' . filesize($file));
-//    readfile($file);
-    exit;
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.basename($file).'"');
+        exit;
 }
     header("Location: index.php");
 }
