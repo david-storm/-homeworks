@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Pacifico&display=swap);
+
 body{
     background-color: #b9c783;
     margin: 0;
@@ -25,17 +28,19 @@ body{
 }
 .container{
     margin: 100px auto 0;
-    width: 25%;
+    width: 300px;
     color: #fffecd;
 }
-h1{
+p{
     font-family: Pacifico;
     font-size: 60px;
     font-weight: 100;
+
 }
 label{
     color: #635960;
-
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 input{
     width: 100%;
@@ -43,17 +48,18 @@ input{
     height: 30px;
     border: none;
     padding: 5px;
+
     font-weight: 600;
     letter-spacing: 1.5px;
     color: #635960;
     background: #fffecd;
 }
 input[type="submit"]{
+
     color: #fffecd;
     background-color: #635960;
     font-family: Montserrat;
     font-size: 20px;
-    
     height: 40px;
 }
 form{
@@ -61,4 +67,20 @@ form{
     flex-direction: column;
     width: 100%;
     font-family: Montserrat;
+}
+.chat{
+    background-color:#fffecd;
+    height: 200px;
+    width: 200px;
+    color: #635960;
+}
+.row{
+    flex-direction: row;
+    justify-content: space-around;
+}
+.row input{
+    flex-grow: 4;
+}
+.row input[type="submit"]{
+    flex-grow: 1;
 }
