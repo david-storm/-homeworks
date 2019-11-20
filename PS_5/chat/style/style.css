@@ -28,12 +28,12 @@ body{
 }
 .container{
     margin: 100px auto 0;
-    width: 300px;
+    width: 20%;
     color: #fffecd;
 }
 p{
     font-family: Pacifico;
-    font-size: 60px;
+    font-size: 3vw;
     font-weight: 100;
 
 }
