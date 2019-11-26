@@ -1,24 +1,20 @@
 <?php
 define("FILENAME", "data_base/users.json");
-
 session_start();
-if (isset($_SESSION['login'])) {
-    header("Location: http://www.example.com/");
-    exit;
-}
+
 if (!empty($_POST) && !empty($_POST['submit'])) {
 
     $data = validation();
+    print_r($data);
     if (isset($data['message'])) {
         messageView($data['message']);
-    }
+  }
     else {
         $resultLogin = authentication($data);
         messageView($resultLogin['message']);
         if ($resultLogin['auth']) {
             $_SESSION['user'] = $data['login'];
-            header("Location: http://www.example.com/");
-            exit;
+            echo file_get_contents("./chat.html");
         }
     }
 }
@@ -37,7 +33,7 @@ function validation() {
             if (strlen($value) < 4) {
                 $result['message'][$key] = $key . ' short';
             }
-            else if (strlen($value) > 20) {
+            else if (strlen($value) > 25) {
                 $result['message'][$key] = $key . ' long';
             }
             else {
@@ -86,33 +82,3 @@ function messageView($message) {
         $GLOBALS[$key] = $value;
     }
 }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Chat</title>
-        <link href="style/style.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-        <div>
-            <form action="auth.php" method="POST">
-                <label>Enter your name
-                    <input type="text" name="login"/>
-
-                </label>
-                <label>Enter your password 
-                    <input type="password" name="password"/>
-
-                </label>
-                <input type="submit" name="submit" value="Submit"/>
-
-            </form>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="js/script.js" ></script>
-    </body>		
-</html>
