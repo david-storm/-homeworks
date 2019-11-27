@@ -5,7 +5,6 @@ session_start();
 if (!empty($_POST) && !empty($_POST['submit'])) {
 
     $data = validation();
-    print_r($data);
     if (isset($data['message'])) {
         messageView($data['message']);
   }
