@@ -21,7 +21,7 @@
                 <div class="item"></div>
         </div>
         <div class="container">
-            <p>Easy Chat</p>
+            <h1>Easy Chat</h1>
             <div id="form">
                 <?=$form?>
             </div>

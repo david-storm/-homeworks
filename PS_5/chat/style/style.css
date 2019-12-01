@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico&display=swap);
 
 body{
-    background-color: white;
+    background-color: #b9c783;
     margin: 0;
 }
 .top-line{
@@ -32,7 +32,7 @@ body{
     min-width: 300px;
     color: #fffecd;
 }
-p{
+h1{
     font-family: Pacifico;
     font-size: 60px;
     font-weight: 100;
@@ -85,9 +85,21 @@ form{
 }
 .chat{
     background-color:#fffecd;
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 400px;
     color: #635960;
+    overflow-y: scroll;
+    padding: 20px;
+}
+.chat .message span{
+    font-weight: 900;
+}
+
+.chat .message{
+   font-family: Montserrat;
+    font-size: 15px;
+    color: black;
+    margin: 0px 0 10px;
 }
 .row{
     flex-direction: row;
