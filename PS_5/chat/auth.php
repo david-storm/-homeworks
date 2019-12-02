@@ -1,4 +1,5 @@
 <?php
+
 define("FILENAME", "data_base/users.json");
 session_start();
 
@@ -6,16 +7,21 @@ if (!empty($_POST) && !empty($_POST['submit'])) {
 
     $data = validation();
     if (isset($data['message'])) {
-        messageView($data['message']);
-  }
-    else {
+        echo $data['message'];
+        
+    } else {
         $resultLogin = authentication($data);
-        messageView($resultLogin['message']);
+        echo $resultLogin['message'];
+        
         if ($resultLogin['auth']) {
             $_SESSION['user'] = $data['login'];
             echo file_get_contents("./chat.html");
         }
     }
+}
+if (!empty($_POST) && !empty($_POST['logout'])) {
+    unset($_SESSION['user']);
+    echo file_get_contents("./login.html");
 }
 
 function validation() {
@@ -31,15 +37,12 @@ function validation() {
 
             if (strlen($value) < 4) {
                 $result['message'][$key] = $key . ' short';
-            }
-            else if (strlen($value) > 25) {
+            } else if (strlen($value) > 25) {
                 $result['message'][$key] = $key . ' long';
-            }
-            else {
+            } else {
                 $result[$key] = $value;
             }
-        }
-        else {
+        } else {
             $result['message'][$key] = "Field $key empty!";
         }
     }
@@ -61,12 +64,10 @@ function authentication($data) {
         $passwordDB = $users[$login];
         if ($passwordDB == $data['password']) {
             $result = array('auth' => TRUE, 'message' => array('auth' => 'Login success'));
-        }
-        else {
+        } else {
             $result = array('auth' => FALSE, 'message' => array('password' => 'Password wrong'));
         }
-    }
-    else {
+    } else {
         $users[$login] = $data['password'];
         rewind($handle);
         fwrite($handle, json_encode($users));
@@ -76,8 +77,3 @@ function authentication($data) {
     return $result;
 }
 
-function messageView($message) {
-    foreach ($message as $key => $value) {
-        $GLOBALS[$key] = $value;
-    }
-}

@@ -23,7 +23,7 @@
         <div class="container">
             <h1>Easy Chat</h1>
             <div id="form">
-                <?=$form?>
+                <?php echo $form;?>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
