@@ -7,15 +7,15 @@ if (!empty($_POST) && !empty($_POST['submit'])) {
 
     $data = validation();
     if (isset($data['message'])) {
-        echo $data['message'];
+        echo json_encode(array("message" => $data['message']));
         
     } else {
         $resultLogin = authentication($data);
-        echo $resultLogin['message'];
+        echo json_encode(array("message" => $resultLogin['message']));
         
         if ($resultLogin['auth']) {
             $_SESSION['user'] = $data['login'];
-            echo file_get_contents("./chat.html");
+            echo json_encode(array("login" => file_get_contents("./chat.html")));
         }
     }
 }
