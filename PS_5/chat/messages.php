@@ -17,7 +17,7 @@ if(!empty($_POST['submit']) && $_POST['submit'] == 'send'){
         fwrite($file, ','.json_encode(array('message' => $message, 'time' => $time, 'user' => $_SESSION['user'])).']');
     }
     fclose($file);
-    echo "message send";
+    echo json_encode("message send");
 }
 if(!empty($_POST['submit']) && $_POST['submit'] == 'check'){
     $lastTime = isset($_POST['lastMessage']) ? $_POST['lastMessage'] : "";

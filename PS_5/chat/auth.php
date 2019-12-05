@@ -11,17 +11,20 @@ if (!empty($_POST) && !empty($_POST['submit'])) {
         
     } else {
         $resultLogin = authentication($data);
-        echo json_encode(array("message" => $resultLogin['message']));
-        
+
         if ($resultLogin['auth']) {
             $_SESSION['user'] = $data['login'];
-            echo json_encode(array("login" => file_get_contents("./chat.html")));
+            echo json_encode(array("login" => file_get_contents("./chat.html"), "message" => $resultLogin['message']));
+        } else {
+             echo json_encode(array("message" => $resultLogin['message']));
         }
     }
 }
+
 if (!empty($_POST) && !empty($_POST['logout'])) {
+    $login = $_SESSION['user'];
     unset($_SESSION['user']);
-    echo file_get_contents("./login.html");
+    echo json_encode(['form' => file_get_contents("./login.html"), 'message' => "Good bye $login"]);
 }
 
 function validation() {
@@ -63,7 +66,7 @@ function authentication($data) {
     if (!empty($users) && array_key_exists($login, $users)) {
         $passwordDB = $users[$login];
         if ($passwordDB == $data['password']) {
-            $result = array('auth' => TRUE, 'message' => array('auth' => 'Login success'));
+            $result = array('auth' => TRUE, 'message' => array('auth' => "Login success. Hello $login"));
         } else {
             $result = array('auth' => FALSE, 'message' => array('password' => 'Password wrong'));
         }
@@ -71,7 +74,7 @@ function authentication($data) {
         $users[$login] = $data['password'];
         rewind($handle);
         fwrite($handle, json_encode($users));
-        $result = array('auth' => TRUE, 'message' => array('auth' => 'Register success'));
+        $result = array('auth' => TRUE, 'message' => array('auth' => "Register success. Hi $login"));
     }
     fclose($handle);
     return $result;

@@ -28,15 +28,16 @@ body{
 }
 .container{
     margin: 50px auto 0;
-    width: 20%;
-    min-width: 300px;
+    width: 35%;
+    min-width: 400px;
     color: #fffecd;
 }
 h1{
     font-family: Pacifico;
     font-size: 60px;
     font-weight: 100;
-    margin: 40px 0;
+    width: fit-content;
+    margin: 40px auto;
 }
 label{
     color: #635960;
@@ -44,7 +45,7 @@ label{
     margin-bottom: 20px;
     position: relative;
 }
-input{
+input, #logout{
     width: 100%;
     margin: 10px 0;
     height: 40px;
@@ -56,12 +57,12 @@ input{
     background: #fffecd;
     box-sizing: border-box;
 }
-input[type="submit"]{
-
+input[type="submit"], #logout{
     color: #fffecd;
     background-color: #635960;
     font-family: Montserrat;
     font-size: 20px;
+    cursor: pointer;
 }
 .shadow{
     position: relative;
@@ -86,8 +87,7 @@ form{
 .chat{
     background-color:#fffecd;
     height: 300px;
-    width: 500px;
-    min-width: 300px;
+    width: 100%;
     color: #635960;
     overflow-y: scroll;
     padding: 20px;
@@ -103,8 +103,12 @@ form{
     color: black;
     margin: 0px 0 10px;
 }
+#form_login {
+    margin: 0 auto;
+    width: 300px;
+}
 #form_chat{
-    width: 440px;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -127,4 +131,26 @@ form{
     position: absolute;
     bottom: -10px;
     right: 0;
+}
+#logout{
+    position: absolute;
+    top: 3%;
+    right: 50px;
+    width: fit-content;
+    height: fit-content;
+}
+.mess{
+    width: fit-content;
+    margin: 10px auto;
+    font-weight: 700;
+    font-size: 20px;
+}
+.bye{
+    color: #1b1c1b;
+}
+.welcome{
+   color: #635960;
+}
+img{
+    width: 25px;
 }
