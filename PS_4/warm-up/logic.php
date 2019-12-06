@@ -29,25 +29,22 @@ function postProcessing() {
         infoByText();
     }
 }
+
 function result($task) {
     echo isset($_SESSION['res']['task' . $task]) ? $_SESSION['res']['task' . $task] : '';
 }
 
 function calculate() {
-    $firstNumber = -1000;
-    $secondNumber = 1000;
     $result = 0;
-    for ($i = $firstNumber; $i <= $secondNumber; $i++) {
+    for ($i = -1000; $i <= 1000; $i++) {
         $result += $i;
     }
     $_SESSION['res']['task1'] = $result;
 }
 
 function calculateV2() {
-    $firstNumber = -1000;
-    $secondNumber = 1000;
     $result = 0;
-    for ($i = $firstNumber; $i <= $secondNumber; $i++) {
+    for ($i = -1000; $i <= 1000; $i++) {
         if (preg_match('/[237]$/', $i)) {
             $result += $i;
         }
@@ -57,22 +54,22 @@ function calculateV2() {
 
 function uploadFile() {
 
-    $target_dir = "upload/";
-    $target_file = $target_dir . basename($_FILES["loadFile"]["name"]);
+    $target_file = 'upload/' . basename($_FILES['loadFile']['name']);
     $res = move_uploaded_file($_FILES['loadFile']['tmp_name'], $target_file);
-    $_SESSION['res']['task3'] = ($res ? "File load sucsess " : "Error") . '</br>';
+    $_SESSION['res']['task3'] = ($res ? 'File load sucsess ' : 'Error') . '</br>';
 }
 
 function drawChessboard() {
     $res = '';
-    $block1 = '<div class="item" style="width:50px;height:50px;background-color:red;display:inline-block;"></div>';
-    $block2 = '<div class="item" style="width:50px;height:50px;background-color:green;display:inline-block;"></div>';
+    $color1 = '#795548';
+    $color2 = '#9e9e9e';
     list($width, $height) = explode("x", $_POST['size']);
-    
-    if(intval($width) && intval($height)){
+
+    if (intval($width) && intval($height)) {
         for ($i = 1; $i <= $width; $i++) {
             for ($j = 1; $j <= $height; $j++) {
-                $res .= $i % 2 == 0 ? ($j % 2 == 0 ? $block1 : $block2) : ($j % 2 == 0 ? $block2 : $block1);
+                $res .= '<div class="item" style="width:50px;height:50px;background-color:'.
+                        (($i + $j) % 2 == 0 ? $color1 : $color2) .';display:inline-block;"></div>';
             }
             $res .= '</br>';
         }
@@ -86,8 +83,7 @@ function sumNumber() {
     $arrayNumbers = str_split($number);
     if (!$arrayNumbers) {
         $_SESSION['res']['task5'] = 0;
-    }
-    else {
+    } else {
         $res = 0;
         foreach ($arrayNumbers as $num) {
             $res += $num;
@@ -111,13 +107,13 @@ function createArray() {
     $array = array_reverse($array);
     $res = array_map('multiplay', $array);
 
-    $_SESSION['res']['task6'] = implode(" - ", $res);
+    $_SESSION['res']['task6'] = implode(' - ', $res);
 }
 
 function infoByText() {
 
     $text = strval($_POST['text']);
-    $length = strlen($text);
+    $length = iconv_strlen($text);
     preg_match_all('/\R/', $text, $rows);
     preg_match_all('/ /', $text, $space);
 
@@ -127,9 +123,9 @@ function infoByText() {
     $countSymbols = $length - $countSpaces - $countLineTranslation * 2;
 
     $_SESSION['res']['text'] = $text;
-    $_SESSION['res']['task8'] = "Count rows - " . $countRows . '.</br>' .
-        'Count space - ' . $countSpaces . '.</br>' .
-        'Count symbols - ' . $countSymbols . '.</br>';
+    $_SESSION['res']['task8'] = "Count rows - $countRows </br>" .
+            "Count space - $countSpaces </br>" .
+            "Count symbols - $countSymbols </br>";
 }
 
 function countVisits() {
@@ -141,7 +137,7 @@ function countVisits() {
 }
 
 function viewsFiles() {
-    
+
     $files1 = array_diff(scandir('upload'), array('..', '.'));
     foreach ($files1 as $file) {
 
@@ -182,12 +178,12 @@ function readableSize($size) {
     return $size . $byteSize;
 }
 
-if(isset($_GET) && isset($_GET['file'])){
-    $file = './upload/'.$_GET['file'];
+if (isset($_GET) && isset($_GET['file'])) {
+    $file = './upload/' . $_GET['file'];
     if (file_exists($file)) {
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="'.basename($file).'"');
+        header('Content-Disposition: attachment; filename="' . basename($file) . '"');
         exit;
-}
+    }
     header("Location: index.php");
 }

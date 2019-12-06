@@ -2,7 +2,7 @@
 if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
     $file = 'resultVoting.json';
-    $handle = fopen($file, "c+");
+    $handle = fopen($file, 'c+');
     $size  = filesize($file); 
 
     //data is not empty
@@ -18,15 +18,14 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
         );
     }
     fclose($handle);
-    $vot = (isset($_POST['animal']) && $_POST['animal'] != 'none') ? substr($_POST['animal'], 0, 10) : false;
+    $vot = (isset($_POST['animal']) && $_POST['animal'] != 'none' && isset($data[$_POST['animal']])) ? $_POST['animal'] : false;
 
     if($vot){
         $data[$vot]++;
     }
     
-    $GLOBALS["data"] = $dataJson =  json_encode($data);
+    $dataJson =  json_encode($data);
     
-    //rename file
     $handle = fopen($file, 'w');
     fwrite($handle, $dataJson);
     fclose($handle);
@@ -45,15 +44,14 @@ if(isset($_POST['submit']) && $_POST['submit'] == 'Submit'){
 
       function drawChart() {
           
-        let date = JSON.parse('<?php echo $GLOBALS["data"]; ?>');
+        let dataJson = JSON.parse('<?=$dataJson;?>');
         let myData = [['Task', 'Hours per Day']];
     
-        for(let prop in date){
-            myData.push([prop, date[prop]]);
+        for(let prop in dataJson){
+            myData.push([prop, dataJson[prop]]);
         }
         
         const data = google.visualization.arrayToDataTable(myData);
-        console.log(data);
         const options = {
           title: 'Preferred animals'
         };

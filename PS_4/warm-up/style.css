@@ -25,9 +25,6 @@ h1{
     padding: 15px;
 }
 
-form{
-
-}
 .result{
     height: auto;
     color: limegreen;
@@ -38,6 +35,8 @@ form{
     margin: 0;
 }
 .chess{
+    width: max-content;
+    margin: 0 auto;
     font-size: 0;
 }
 .flex-container{
