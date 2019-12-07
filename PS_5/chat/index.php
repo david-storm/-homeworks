@@ -1,11 +1,10 @@
 <?php
 session_start();
 
-//print_r($_SESSION);
 if(empty($_SESSION['user'])){
-    $form = file_get_contents("./login.html");
+    $form = file_get_contents("templates/login.html");
 } else {
-    $form = file_get_contents("./chat.html");
+    $form = file_get_contents("templates/chat.html");
 }
 
-include 'tmpl.php';
+include 'templates/tmpl.php';
