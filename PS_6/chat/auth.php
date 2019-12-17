@@ -14,6 +14,7 @@ if (!empty($_POST) && !empty($_POST['submit'])) {
 	$resultLogin = authentication($data);
 	if (!$resultLogin['auth']) {
 		echo json_encode(['message' => $resultLogin['message']]);
+                return;
 	}
 
 	$_SESSION['user'] = $data['login'];

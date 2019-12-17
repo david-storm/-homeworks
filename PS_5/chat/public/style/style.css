@@ -70,14 +70,14 @@ input[type="submit"], #logout{
 .shadow::after{
     content: '';
     position: absolute;
-    top: 84%;
-    right: -5%;
+    top: 85%;
+    right: -5.5%;
     bottom: -250%;
     left: 0;
     opacity: 0.1;
     background: linear-gradient(black, transparent);
     z-index: -1;
-    transform: skew(20deg)translate(39px, -21px)rotate(-7.5deg);
+    transform: skew(20deg)translate(38px, -22px)rotate(-7deg);
 }
 form{
     display: flex;
@@ -98,10 +98,11 @@ form{
 }
 
 .chat .message{
-   font-family: Montserrat;
+    font-family: Montserrat;
     font-size: 15px;
     color: black;
     margin: 0px 0 10px;
+    position: relative;
 }
 #form_login {
     margin: 0 auto;
@@ -113,10 +114,11 @@ form{
     justify-content: space-between;
 }
 #message{
-    width:70%
+    margin-top: 40px;
 }
 #send {
-    width:20%;
+    margin: 40px 0 0 40px;
+    width: 100px;
 }
 .row input{
     flex-grow: 4;
@@ -149,8 +151,10 @@ form{
     color: #1b1c1b;
 }
 .welcome{
-   color: #635960;
+    color: #635960;
 }
 img{
     width: 25px;
+    position: absolute;
+    top: -4px;
 }

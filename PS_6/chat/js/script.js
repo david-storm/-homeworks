@@ -1,10 +1,10 @@
-
+const TIME_UPDATE = 1000;
 $('.container').on('submit', '#form_login', login);
 $('.container').on('submit', '#form_chat', sendMessage);
 $('.container').on('click', '#logout', logout);
 
 checkMessage();
-setInterval(checkMessage, 5000);
+setInterval(checkMessage, TIME_UPDATE);
 
 function login() {
     event.preventDefault();
@@ -32,6 +32,10 @@ function login() {
 function sendMessage() {
     event.preventDefault();
     let time = Date.now();
+    if (!$("#message").val()) {
+        temporaryMessageToUser();
+        return;
+    }
     $.ajax({
         method: 'POST',
         url: 'messages.php',
@@ -82,15 +86,25 @@ function temporaryMessageToUser(place, message, styleClass, dopStyleClass = '') 
 
 function writeMessage(obj) {
     const date = new Date(+obj.time);
+    const time = formatTime(date);
+    const text = replaceSmile(obj.text);
+    const message = `<p class="message">${time} <span>${obj.user}: </span>${text}</p>`;
+    $('.chat-container').append(message);
+    $('.chat').scrollTop(99999);
+    return date.getTime();
+}
+
+function formatTime(date) {
     const hour = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
     const minute = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
     const seconds = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds();
-    const time = `[${hour}:${minute}:${seconds}]`;
-    let text = obj.message.replace(':)', '<img src="./smile/positiv.png">');
+    return `[${hour}:${minute}:${seconds}]`;
+}
+
+function replaceSmile(text){
+    text = text.replace(':)', '<img src="./smile/positiv.png">');
     text = text.replace(':(', '<img src="./smile/negative.png">');
-    const message = `<p class="message">${time} <span>${obj.user}: </span>${text}</p>`;
-    $('.chat-container').append(message);
-    return date.getTime();
+    return text;
 }
 
 

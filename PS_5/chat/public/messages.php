@@ -1,12 +1,12 @@
 <?php
 
 session_start();
-define('FILENAME', 'data_base/messages.json');
+define('FILENAME', '../data_base/messages.json');
 
 if (!empty($_POST['submit']) && $_POST['submit'] == 'send') {
 
-    $message = $_POST['message'];
-    $time = $_POST['time'];
+    $message = strip_tags($_POST['message']);
+    $time = intval($_POST['time']);
 
     $file = fopen(FILENAME, 'r+');
     if (!filesize(FILENAME)) {

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 17 2019 г., 16:10
--- Версия сервера: 10.3.16-MariaDB
+-- Время создания: Дек 17 2019 г., 23:06
+-- Версия сервера: 10.3.15-MariaDB
 -- Версия PHP: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `message` (
   `id` int(10) NOT NULL,
   `text` text CHARACTER SET utf8mb4 NOT NULL,
-  `time` int(13) NOT NULL,
+  `time` bigint(13) NOT NULL,
   `user` varchar(32) CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
