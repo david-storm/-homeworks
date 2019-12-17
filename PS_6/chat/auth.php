@@ -1,22 +1,24 @@
 <?php
-require('connectSql.php');
+require_once('connectSql.php');
 session_start();
 
 if (!empty($_POST) && !empty($_POST['submit'])) {
 
 	$data = validation();
+
 	if (isset($data['message'])) {
 		echo json_encode(['message' => $data['message']]);
-	} else {
-		$resultLogin = authentication($data);
-
-		if ($resultLogin['auth']) {
-			$_SESSION['user'] = $data['login'];
-			echo json_encode(['login' => file_get_contents('templates/chat.html'), 'message' => $resultLogin['message']]);
-		} else {
-			echo json_encode(['message' => $resultLogin['message']]);
-		}
+		return;
 	}
+
+	$resultLogin = authentication($data);
+	if (!$resultLogin['auth']) {
+		echo json_encode(['message' => $resultLogin['message']]);
+	}
+
+	$_SESSION['user'] = $data['login'];
+	echo json_encode(['login' => file_get_contents('templates/chat.html'), 'message' => $resultLogin['message']]);
+	return;
 }
 
 if (!empty($_POST) && !empty($_POST['logout'])) {
@@ -29,29 +31,38 @@ function validation() {
 	$result = [];
 
 	foreach ($_POST as $key => $value) {
+
 		if (!($key == 'login' || $key == 'password')) {
 			continue;
 		}
 
-		if (!empty($_POST[$key])) {
-			$value = strval($_POST[$key]);
-
-			if (strlen($value) < 4) {
-				$result['message'][$key] = "$key short";
-			} else if (strlen($value) > 25) {
-				$result['message'][$key] = "$key long";
-			} else {
-				$result[$key] = $value;
-			}
-		} else {
+		if (empty($_POST[$key])) {
 			$result['message'][$key] = "Field $key empty!";
+			continue;
 		}
+
+		$value = ($key == 'login') ? strip_tags($_POST[$key]) : strval($_POST[$key]);
+		if (strlen($value) < 4) {
+			$result['message'][$key] = "$key short";
+			continue;
+		}
+		if (strlen($value) > 25) {
+			$result['message'][$key] = "$key long";
+			continue;
+		}
+		$result[$key] = $value;
 	}
 	return $result;
 }
 
 function authentication($data) {
 	global $connect;
+
+	$connect = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DB_NAME);
+
+	if ($connect->connect_error) {
+		die("Connection failed: " . $connect->connect_error . "\n");
+	}
 	$login = $data['login'];
 
 	$sql = sprintf("SELECT * FROM `users` WHERE `name`='%s' LIMIT 1", $connect->real_escape_string($login));

@@ -1,40 +1,29 @@
 <?php
-
+require_once('connectSql.php');
 session_start();
-define('FILENAME', 'data_base/messages.json');
+
+$connect = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DB_NAME);
+
+if ($connect->connect_error) {
+	die("Connection failed: " . $connect->connect_error . "\n");
+}
 
 if (!empty($_POST['submit']) && $_POST['submit'] == 'send') {
 
-    $message = $_POST['message'];
-    $time = $_POST['time'];
+	$message = $connect->real_escape_string($_POST['message']);
+	$time =  $connect->real_escape_string($_POST['time']);
 
-    $file = fopen(FILENAME, 'r+');
-    if (!filesize(FILENAME)) {
-        fwrite($file, '[]');
-        fseek($file, -1, SEEK_END);
-        fwrite($file, json_encode(['message' => $message, 'time' => $time, 'user' => $_SESSION['user']]) . ']');
-    }
-    else {
-        fseek($file, -1, SEEK_END);
-        fwrite($file, ',' . json_encode(['message' => $message, 'time' => $time, 'user' => $_SESSION['user']]) . ']');
-    }
-    fclose($file);
-    echo json_encode('message send');
+	$sql = sprintf('INSERT INTO `message` (`text`, `time`, `user`) VALUES ("%s", %u, "%s")', $message, $time, $connect->real_escape_string($_SESSION['user']));
+	$result = $connect->query($sql);
+
+	echo json_encode( $result ? 'message send' : 'error');
 }
+
 if (!empty($_POST['submit']) && $_POST['submit'] == 'check') {
-    $lastTime = isset($_POST['lastMessage']) ? $_POST['lastMessage'] : '';
-    $timeNow = $_POST['timeNow'];
 
-    $file = fopen(FILENAME, 'r');
-    $messageDB = json_decode(fread($file, filesize(FILENAME)), true);
-    $messageDBR = array_reverse($messageDB);
-    $new_messages = [];
-    foreach ($messageDBR as $message) {
-        if (($lastTime && $lastTime >= $message['time']) || $timeNow - 3600000 > $message['time']) {
-            break;
-        }
-        $new_messages[] = $message;
-    }
+	$sql = sprintf('SELECT `text`, `time`, `user` FROM `message` WHERE `time`>%u',  isset($_POST['lastMessage']) ? $_POST['lastMessage'] : $_POST['timeNow']);
+	$result = $connect->query($sql);
 
-    echo json_encode(array_reverse($new_messages));
+	$new_messages = $result->mysqli_fetch_all();
+	echo json_encode($new_messages);
 }
