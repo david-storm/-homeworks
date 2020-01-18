@@ -1,11 +1,10 @@
 <?php
-require_once('connectSql.php');
+require_once('../sql/connectSql.php');
 session_start();
 
-if (!empty($_POST) && !empty($_POST['submit'])) {
+if (isset($_POST['submit'])) {             
 
 	$data = validation();
-
 	if (isset($data['message'])) {
 		echo json_encode(['message' => $data['message']]);
 		return;
@@ -18,14 +17,14 @@ if (!empty($_POST) && !empty($_POST['submit'])) {
 	}
 
 	$_SESSION['user'] = $data['login'];
-	echo json_encode(['login' => file_get_contents('templates/chat.html'), 'message' => $resultLogin['message']]);
+	echo json_encode(['login' => file_get_contents('../public/templates/chat.html'), 'message' => $resultLogin['message']]);
 	return;
 }
 
 if (!empty($_POST) && !empty($_POST['logout'])) {
 	$login = $_SESSION['user'];
 	unset($_SESSION['user']);
-	echo json_encode(['form' => file_get_contents("templates/login.html"), 'message' => "Good bye $login"]);
+	echo json_encode(['form' => file_get_contents("../public/templates/login.html"), 'message' => "Good bye $login"]);
 }
 
 function validation() {

@@ -1,5 +1,5 @@
 <?php
-require_once('connectSql.php');
+require_once('../sql/connectSql.php');
 session_start();
 
 $connect = new mysqli(SERVER_NAME, USER_NAME, PASSWORD, DB_NAME);
@@ -10,7 +10,7 @@ if ($connect->connect_error) {
 
 if (!empty($_POST['submit']) && $_POST['submit'] == 'send') {
 
-	$message = $connect->real_escape_string($_POST['message']);
+	$message = $connect->real_escape_string(strip_tags($_POST['message']));
 	$time =  intval($_POST['time']);
 
 	$sql = sprintf('INSERT INTO `message` (`text`, `time`, `user`) VALUES ("%s", %u, "%s")', $message, $time, $connect->real_escape_string($_SESSION['user']));
