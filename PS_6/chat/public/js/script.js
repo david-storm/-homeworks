@@ -107,8 +107,8 @@ function formatTime(date) {
 }
 
 function replaceSmile(text){
-    text = text.replace(':)', '<img src="../smile/positiv.png">');
-    text = text.replace(':(', '<img src="../smile/negative.png">');
+    text = text.replace(':)', '<img src="./smile/positiv.png">');
+    text = text.replace(':(', '<img src="./smile/negative.png">');
     return text;
 }
 
