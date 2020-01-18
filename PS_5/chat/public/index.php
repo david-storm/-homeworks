@@ -2,9 +2,9 @@
 session_start();
 
 if(empty($_SESSION['user'])){
-    $form = file_get_contents("./templates/login.html");
+    $form = file_get_contents("../public/templates/login.html");
 } else {
-    $form = file_get_contents("./templates/chat.html");
+    $form = file_get_contents("../public/templates/chat.html");
 }
 
-include './templates/tmpl.php';
+include '../public/templates/tmpl.php';

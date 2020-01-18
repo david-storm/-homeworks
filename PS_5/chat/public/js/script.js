@@ -1,4 +1,5 @@
 const TIME_UPDATE = 1000;
+const TIME_DELETE_MESSAGE = 5000;
 $('.container').on('submit', '#form_login', login);
 $('.container').on('submit', '#form_chat', sendMessage);
 $('.container').on('click', '#logout', logout);
@@ -8,9 +9,9 @@ setInterval(checkMessage, TIME_UPDATE);
 
 function login() {
     event.preventDefault();
-    $.ajax({
+    $.ajax({    
         method: 'POST',
-        url: 'auth.php',
+        url: '../php/auth.php',
         data: {login: $('#login').val(), password: $('#password').val(), submit: 'login'}
     })
             .done(result => {
@@ -38,7 +39,7 @@ function sendMessage() {
     }
     $.ajax({
         method: 'POST',
-        url: 'messages.php',
+        url: '../php/messages.php',
         data: {message: $('#message').val(), time: time, submit: 'send'}
     })
             .done(mess => {
@@ -52,7 +53,7 @@ function sendMessage() {
 function logout() {
     $.ajax({
         method: 'POST',
-        url: 'auth.php',
+        url: '../php/auth.php',
         data: {logout: true}
     })
             .done(json => {
@@ -66,7 +67,7 @@ function checkMessage() {
     let lastMessageTime = $('.chat-container').attr('lastTimeMassage');
     $.ajax({
         method: 'POST',
-        url: 'messages.php',
+        url: '../php/messages.php',
         data: {lastMessage: lastMessageTime, timeNow: Date.now(), submit: 'check'}
     })
             .done(mess => {
@@ -78,19 +79,22 @@ function checkMessage() {
             });
 }
 function temporaryMessageToUser(place, message, styleClass, dopStyleClass = '') {
+
+    $(`${place} ~ .${styleClass}`).remove();
     $(`${place}`).after(`<p class="${styleClass} ${dopStyleClass}">${message}</p>`);
+    
     setTimeout(() => {
         $(`.${styleClass}`).remove();
-    }, 3000);
+    }, TIME_DELETE_MESSAGE);
 }
 
-function writeMessage(obj) {
-    const date = new Date(+obj.time);
+function writeMessage(dataMessage) {
+    const date = new Date(+dataMessage.time);
     const time = formatTime(date);
-    const text = replaceSmile(obj.message);
-    const message = `<p class="message">${time} <span>${obj.user}: </span>${text}</p>`;
+    const text = replaceSmile(dataMessage.message);
+    const message = `<p class="message">${time} <span>${dataMessage.user}: </span>${text}</p>`;
     $('.chat-container').append(message);
-    $('.chat').scrollTop(99999);
+    $('.chat').scrollTop($('.chat-container .message').last()[0].offsetTop);
     return date.getTime();
 }
 

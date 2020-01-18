@@ -3,7 +3,7 @@
 define('FILE_NAME', '../data_base/users.json');
 session_start();
 
-if (!empty($_POST) && !empty($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
     $data = validation();
     if (isset($data['message'])) {
@@ -19,13 +19,13 @@ if (!empty($_POST) && !empty($_POST['submit'])) {
     }
 
     $_SESSION['user'] = $data['login'];
-    echo json_encode(['login' => file_get_contents('./templates/chat.html'), 'message' => $resultLogin['message']]);
+    echo json_encode(['login' => file_get_contents('../public/templates/chat.html'), 'message' => $resultLogin['message']]);
 }
 
-if (!empty($_POST) && !empty($_POST['logout'])) {
+if (isset($_POST['logout'])) {
     $login = $_SESSION['user'];
     unset($_SESSION['user']);
-    echo json_encode(['form' => file_get_contents("./templates/login.html"), 'message' => "Good bye $login"]);
+    echo json_encode(['form' => file_get_contents("../public/templates/login.html"), 'message' => "Good bye $login"]);
 }
 
 function validation() {
