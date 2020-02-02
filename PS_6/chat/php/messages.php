@@ -8,7 +8,7 @@ if ($connect->connect_error) {
 	die("Connection failed: " . $connect->connect_error . "\n");
 }
 
-if (!empty($_POST['submit']) && $_POST['submit'] == 'send') {
+if (!empty($_POST['submit']) && $_POST['submit'] === 'send') {
 
 	$message = $connect->real_escape_string(strip_tags($_POST['message']));
 	$time =  intval($_POST['time']);
@@ -19,7 +19,7 @@ if (!empty($_POST['submit']) && $_POST['submit'] == 'send') {
 	echo json_encode( $result ? 'message send': 'error');
 }
 
-if (!empty($_POST['submit']) && $_POST['submit'] == 'check') {
+if (!empty($_POST['submit']) && $_POST['submit'] === 'check') {
 
 	$sql = sprintf('SELECT `text`, `time`, `user` FROM `message` WHERE `time`>%u',  isset($_POST['lastMessage']) ? $_POST['lastMessage'] : $_POST['timeNow'] - 3600000);
 	$result = $connect->query($sql);

@@ -2,7 +2,7 @@
 require_once('../sql/connectSql.php');
 session_start();
 
-if (isset($_POST['submit'])) {             
+if (!empty($_POST['submit'])) {             
 
 	$data = validation();
 	if (isset($data['message'])) {
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 	return;
 }
 
-if (!empty($_POST) && !empty($_POST['logout'])) {
+if (!empty($_POST['logout'])) {
 	$login = $_SESSION['user'];
 	unset($_SESSION['user']);
 	echo json_encode(['form' => file_get_contents("../public/templates/login.html"), 'message' => "Good bye $login"]);

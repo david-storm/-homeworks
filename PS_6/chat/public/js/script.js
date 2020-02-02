@@ -1,5 +1,6 @@
 const TIME_UPDATE = 1000;
 const TIME_DELETE_MESSAGE = 5000;
+let logedIn = $('#form_chat').length ? true : false;
 $('.container').on('submit', '#form_login', login);
 $('.container').on('submit', '#form_chat', sendMessage);
 $('.container').on('click', '#logout', logout);
@@ -7,7 +8,7 @@ $('.container').on('click', '#logout', logout);
 checkMessage();
 setInterval(checkMessage, TIME_UPDATE);
 
-function login() {
+function login(event) {
     event.preventDefault();
     $.ajax({    
         method: 'POST',
@@ -18,6 +19,7 @@ function login() {
                 const res = JSON.parse(result);
                 if (res.login) {
                     $('#form').html(res.login);
+                    logedIn = true;
                     temporaryMessageToUser('h1', res.message['auth'], 'mess', 'welcome');
                 } else {
                     if (res.message['login']) {
@@ -59,11 +61,15 @@ function logout() {
             .done(json => {
                 const data = JSON.parse(json);
                 $('#form').html(data.form);
+                logedIn = false;
                 temporaryMessageToUser('h1', data.message, 'mess', 'bye');
             });
 }
 
 function checkMessage() {
+    if(!logedIn){
+        return;
+    }
     let lastMessageTime = $('.chat-container').attr('lastTimeMassage');
     $.ajax({
         method: 'POST',
